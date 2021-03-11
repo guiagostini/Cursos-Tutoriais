@@ -1,0 +1,57 @@
+﻿@model WebApplication1.ViewModels.Produtos.AddEdit.ProdutoAddEditVM
+@{ 
+    ViewBag.Title = $"{(Model.Id == 0 ? "Adicionar":"Editar")} produto";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form method="post">
+
+    <div class="form-group">
+        <label for="txtNome">Nome: </label>
+        @Html.TextBoxFor(m => m.Nome, new {@class="form-control", autofocus="" })
+        <small>
+            @Html.ValidationMessageFor(m => m.Nome, null, new { @class = "text-danger" })
+        </small>   
+    </div>
+
+    <div class="form-group">
+        <label for="txtPreco">Preço: </label>
+        @Html.TextBoxFor(m => m.Preco, new { @class = "form-control"})
+        <small>
+            @Html.ValidationMessageFor(m => m.Preco, null, new { @class = "text-danger" })
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="txtNTipo">Tipo: </label>
+        @Html.DropDownListFor(m => m.TipoProdutoId, new SelectList(ViewBag.Tipos, "Id", "Nome"), "Selecione", new {@class="form-control"} )
+        <small>
+            @Html.ValidationMessageFor(m => m.TipoProdutoId, null, new { @class = "text-danger" })
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="txtQuantidade">Quantidade: </label>
+        @Html.TextBoxFor(m => m.Quantidade, new { @class = "form-control" })
+        <small>
+            @Html.ValidationMessageFor(m => m.Quantidade, null, new { @class = "text-danger" })
+        </small>
+    </div>
+
+    <div>
+        @Html.ValidationSummary(true)
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-outline-secondary"> Salvar </button>
+        <a class="btn btn-outline-info" href=@Url.Action("Index")>Cancelar</a>
+    </div>
+
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.validate.js"></script>
+    }
